@@ -154,8 +154,6 @@ jobs:
             local clean_name=$(echo "${raw_img}" | sed -e 's|^docker.io/||' -e 's|^library/||' -e 's|[/:]|-|g' -e 's|[^a-zA-Z0-9._-]|-|g')
             local tar_filename="${clean_name}_${arch}.tar.gz"
             local tar_path="./dist/${tar_filename}"
-            local sha_filename="${tar_filename}.sha256"
-            local sha_path="./dist/${sha_filename}"
 
             echo "Pulling ${raw_img} with platform ${platform}..."
             docker pull --platform "${platform}" "${raw_img}"
@@ -167,8 +165,7 @@ jobs:
             echo "Saving and compressing to ${tar_path}..."
             docker save "${raw_img}" | gzip -9 > "${tar_path}"
 
-            (cd ./dist && sha256sum "${tar_filename}" > "${sha_filename}")
-            local file_sha256=$(awk '{print $1}' "${sha_path}")
+            local file_sha256=$(sha256sum "${tar_path}" | awk '{print $1}')
             local file_size=$(numfmt --to=iec-i --suffix=B $(stat -c%s "${tar_path}"))
 
             echo "Successfully exported: ${tar_filename} (${file_size})"
@@ -233,11 +230,11 @@ jobs:
           if gh release view "${TAG}" >/dev/null 2>&1; then
             echo "Release ${TAG} already exists. Uploading new/updated assets..."
             gh release edit "${TAG}" --title "${RELEASE_TITLE}" --notes-file release_notes.md
-            gh release upload "${TAG}" ./dist/* --clobber
+            gh release upload "${TAG}" ./dist/*.tar.gz --clobber
           else
             echo "Creating new release: ${TAG}"
             gh release create "${TAG}" \
-              ./dist/* \
+              ./dist/*.tar.gz \
               --target "${{ github.sha }}" \
               --title "${RELEASE_TITLE}" \
               --notes-file release_notes.md

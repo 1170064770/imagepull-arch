@@ -12,9 +12,9 @@
 2. **多架构精准拉取**：
    - `image_x86.txt` 镜像指定 `--platform linux/amd64`。
    - `image_arm.txt` 镜像指定 `--platform linux/arm64`（配置 QEMU 支持跨架构拉取与导出）。
-3. **高效流式压缩与校验**：
+3. **高效流式压缩**：
    - 使用 `gzip -9` 实时流式压缩，大幅缩减文件体积。
-   - 每个镜像附带同名 `.sha256` 校验文件，确保离线下载的完整性。
+   - Release Notes 中保留 SHA256 校验哈希，方便用户按需比对。
 4. **变动与增量提取**：
    - Push 触发时自动通过 `git diff` 提取本次 commit 新增/变动的镜像。
    - 支持 `workflow_dispatch` 手动触发，并可自定义发布 Tag。
