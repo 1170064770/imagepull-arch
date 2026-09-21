@@ -1,0 +1,6 @@
+{
+  "name": "Docker Image Release GitHub Action",
+  "description": "A GitHub Action workflow generator and manager to pull, docker save, and publish multi-arch container images to GitHub Releases when image_x86.txt or image_arm.txt changes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

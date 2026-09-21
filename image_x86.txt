@@ -1,0 +1,7 @@
+# x86_64 / amd64 container images list (one per line)
+# Lines starting with # or empty lines are ignored.
+# Whenever this file is changed, the GitHub Action pulls, saves, and creates a release for each image.
+
+alpine:3.20
+nginx:1.27-alpine
+busybox:latest
