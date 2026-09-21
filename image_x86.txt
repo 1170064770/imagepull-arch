@@ -2,6 +2,11 @@
 # Lines starting with # or empty lines are ignored.
 # Whenever this file is changed, the GitHub Action pulls, saves, and creates a release for each image.
 
-alpine:3.20
-nginx:1.27-alpine
-busybox:latest
+registry.k8s.io/sig-storage/csi-attacher:v4.8.0
+registry.k8s.io/sig-storage/csi-provisioner:v5.2.0
+registry.k8s.io/sig-storage/csi-resizer:v1.13.2
+registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.13.0
+registry.k8s.io/sig-storage/livenessprobe:v2.15.0
+registry.k8s.io/sig-storage/csi-snapshotter:v8.2.0
+registry.k8s.io/sig-storage/snapshot-controller:v8.2.0
+registry.k8s.io/sig-storage/csi-external-health-monitor-controller:v0.17.0
