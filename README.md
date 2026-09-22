@@ -71,6 +71,9 @@ gzip -dc nginx-1.27-alpine_x86.tar.gz | docker load
 # 方式 B：使用 docker load -i
 docker load -i nginx-1.27-alpine_x86.tar.gz
 
+# 方式 C：使用 skopeo copy
+skopeo copy [--dest-tls-verify=false] --dest-creds '<USER:PASSWD>' docker-archive:busybox_x86.tar.gz docker://<DOMAIN:PORT>/csi/sig-storage/busybox:v666
+
 # 校验镜像已成功载入
 docker images
 ```
